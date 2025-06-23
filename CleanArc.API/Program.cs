@@ -1,5 +1,5 @@
 
-using CleanArc.Application.Repository.Member;
+using CleanArc.Application.Repository;
 using CleanArc.Application.Service.Member;
 using CleanArc.Infrastructure.Repository.Member;
 

@@ -1,10 +1,10 @@
-﻿using CleanArc.Application.Repository.Member;
-using CleanArc.Domain.Member;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CleanArc.Application.Repository;
+using CleanArc.Domain.Entities.Member;
 
 namespace CleanArc.Application.Service.Member
 {
@@ -16,7 +16,7 @@ namespace CleanArc.Application.Service.Member
             _IMemberRepository = IMemberRepository;
         }
 
-        public async Task<List<MemberDomain>> Get()
+        public async Task<List<MemberEntity>> Get()
         {
             return await _IMemberRepository.Get();
         }

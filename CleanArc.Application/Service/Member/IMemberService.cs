@@ -1,4 +1,5 @@
-﻿using CleanArc.Domain.Member;
+﻿using CleanArc.Domain.Entities;
+using CleanArc.Domain.Entities.Member;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace CleanArc.Application.Service.Member
 {
     public interface IMemberService
     {
-        Task<List<MemberDomain>> Get();
+        Task<List<MemberEntity>> Get();
     }
 }

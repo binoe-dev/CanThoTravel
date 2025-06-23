@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CleanArc.Application\CleanArc.Application.csproj" />
-    <ProjectReference Include="..\CleanArc.Domain\CleanArc.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

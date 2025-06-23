@@ -1,14 +1,14 @@
-﻿using CleanArc.Domain.Member;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CleanArc.Domain.Entities.Member;
 
-namespace CleanArc.Application.Repository.Member
+namespace CleanArc.Application.Repository
 {
     public interface IMemberRepository
     {
-        Task<List<MemberDomain>> Get();
+        Task<List<MemberEntity>> Get();
     }
 }

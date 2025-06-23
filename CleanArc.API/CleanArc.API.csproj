@@ -12,8 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CleanArc.Application\CleanArc.Application.csproj" />
+    <ProjectReference Include="..\CleanArc.Domain\CleanArc.Domain.csproj" />
     <ProjectReference Include="..\CleanArc.Infrastructure\CleanArc.Infrastructure.csproj" />
-    <ProjectReference Include="..\CleanArc\CleanArc.Domain.csproj" />
   </ItemGroup>
 
 </Project>
