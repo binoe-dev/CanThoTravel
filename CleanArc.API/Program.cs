@@ -1,4 +1,5 @@
 
+using CanThoTravel.Infrastructure.Configuration;
 using CleanArc.Application.Repository;
 using CleanArc.Application.Service.Member;
 using CleanArc.Infrastructure.Repository.Member;
@@ -19,6 +20,9 @@ namespace CleanArc.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IMemberRepository, MemberRepository>();
             builder.Services.AddScoped<IMemberService, MemberService>();
+
+            var dbSettings = builder.Configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>();
+            builder.Services.AddSingleton(dbSettings);
 
             var app = builder.Build();
 

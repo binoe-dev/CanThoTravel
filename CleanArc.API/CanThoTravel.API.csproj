@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CleanArc.Application\CleanArc.Application.csproj" />
-    <ProjectReference Include="..\CleanArc.Domain\CleanArc.Domain.csproj" />
-    <ProjectReference Include="..\CleanArc.Infrastructure\CleanArc.Infrastructure.csproj" />
+    <ProjectReference Include="..\CleanArc.Application\CanThoTravel.Application.csproj" />
+    <ProjectReference Include="..\CleanArc.Domain\CanThoTravel.Domain.csproj" />
+    <ProjectReference Include="..\CleanArc.Infrastructure\CanThoTravel.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

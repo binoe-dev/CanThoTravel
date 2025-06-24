@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArc.Application", "CleanArc.Application\CleanArc.Application.csproj", "{153BFF4B-2B46-4560-B8F5-F83E9C422565}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanThoTravel.Application", "CleanArc.Application\CanThoTravel.Application.csproj", "{153BFF4B-2B46-4560-B8F5-F83E9C422565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArc.Infrastructure", "CleanArc.Infrastructure\CleanArc.Infrastructure.csproj", "{E648C83F-CB4B-4FC0-8E15-CD1FC0B4DA80}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanThoTravel.Infrastructure", "CleanArc.Infrastructure\CanThoTravel.Infrastructure.csproj", "{E648C83F-CB4B-4FC0-8E15-CD1FC0B4DA80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArc.API", "CleanArc.API\CleanArc.API.csproj", "{A62D0AB5-FF5E-4257-B9A4-581CBF4BA6BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanThoTravel.API", "CleanArc.API\CanThoTravel.API.csproj", "{A62D0AB5-FF5E-4257-B9A4-581CBF4BA6BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArc.Domain", "CleanArc.Domain\CleanArc.Domain.csproj", "{E13517EB-3360-4501-947D-B33AC7048502}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanThoTravel.Domain", "CleanArc.Domain\CanThoTravel.Domain.csproj", "{E13517EB-3360-4501-947D-B33AC7048502}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
