@@ -10,5 +10,6 @@ namespace CleanArc.Application.Repository
     public interface IMemberRepository
     {
         Task<List<MemberEntity>> Get();
+        Task<List<MemberEntity>> GetAll();
     }
 }

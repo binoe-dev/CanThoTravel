@@ -22,5 +22,11 @@ namespace CleanArc.Infrastructure.Repository.Member
         {
             return lstMembers;
         }
+
+        public async Task<List<MemberEntity>> GetAll()
+        {
+
+            return lstMembers;
+        }
     }
 }
