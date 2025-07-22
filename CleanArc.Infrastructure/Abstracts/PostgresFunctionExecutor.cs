@@ -15,12 +15,10 @@ namespace CleanArc.Infrastructure.Abstracts
     public abstract class PostgresFunctionBase<TEntity> where TEntity : class
     {
         private readonly NpgsqlConnection _connection;
-        private readonly ILogger<PostgresFunctionBase<TEntity>> _logger;
         private readonly ITransactionManager _transactionManager;
 
-        public PostgresFunctionBase(NpgsqlConnection npgsqlConnection, ILogger<PostgresFunctionBase<TEntity>> logger, ITransactionManager transactionManager) {
+        public PostgresFunctionBase(NpgsqlConnection npgsqlConnection, ITransactionManager transactionManager) {
             _connection = npgsqlConnection;
-            _logger = logger;
             _transactionManager = transactionManager;
         }
 
@@ -95,7 +93,6 @@ namespace CleanArc.Infrastructure.Abstracts
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Failed to execute function with cursor: {FunctionName}", functionName);
                     // Attempt to close the cursor in case of error
                     try
                     {
@@ -124,7 +121,6 @@ namespace CleanArc.Infrastructure.Abstracts
                 try { await _connection.OpenAsync(); }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Failed to open database connection.");
                     throw new InvalidOperationException("Failed to open database connection.", ex);
                 }
             }
@@ -170,7 +166,6 @@ namespace CleanArc.Infrastructure.Abstracts
                 if (isNewTx)
                     await _transactionManager.RollbackAsync(tx);
 
-                _logger.LogError(ex, "Transaction failed.");
                 throw;
             }
             finally
@@ -239,7 +234,6 @@ namespace CleanArc.Infrastructure.Abstracts
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error mapping property {PropertyName} with value {Value}", prop.Name, value);
                 throw new InvalidOperationException($"Error mapping property {prop.Name} with value {value}", ex);
             }
         }

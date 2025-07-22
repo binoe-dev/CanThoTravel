@@ -1,5 +1,9 @@
 ﻿using CleanArc.Application.Repository;
+using CleanArc.Application.Repository.PostgreSQL;
 using CleanArc.Domain.Entities.Member;
+using CleanArc.Infrastructure.Abstracts;
+using Microsoft.Extensions.Logging;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CleanArc.Infrastructure.Repository.Member
 {
-    public class MemberRepository : IMemberRepository
+    public class MemberRepository : PostgresFunctionBase<MemberEntity>, IMemberRepository
     {
         public static List<MemberEntity> lstMembers = new List<MemberEntity>()
         {
@@ -18,9 +22,18 @@ namespace CleanArc.Infrastructure.Repository.Member
             new MemberEntity { Id = 4, Address = "321 Pine St", Name = "Bob Brown", Type = "Premium" },
             new MemberEntity { Id = 5, Address = "654 Maple St", Name = "Charlie White", Type = "Regular" }
         };
+
+        public MemberRepository(NpgsqlConnection npgsqlConnection, ITransactionManager transactionManager) : base(npgsqlConnection, transactionManager)
+        {
+        }
+
         public async Task<List<MemberEntity>> Get()
         {
-            return lstMembers;
+            var lstParams = new Dictionary<string, object>();
+            lstParams.Add("p_member_id", "1");
+
+            var result = await ExecuteFunctionWithCursorAsync<MemberEntity>("get_member", lstParams);
+            return result.ToList();
         }
 
         public async Task<List<MemberEntity>> GetAll()
