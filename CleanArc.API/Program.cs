@@ -45,7 +45,7 @@ namespace CleanArc.API
                 var npgsqlConnection = provider.GetRequiredService<NpgsqlConnection>();
                 if (npgsqlConnection == null)
                 {
-                    throw new InvalidOperationException("NpgsqlConnection is not initialized.");
+                    throw new InvalidOperationException("NpgsqlConnection is not declared.");
                 }
 
                 var configuration = provider.GetRequiredService<IConfiguration>();
