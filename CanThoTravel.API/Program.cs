@@ -2,7 +2,6 @@
 using CanThoTravel.Application.CQRS.Members.Queries;
 using CanThoTravel.Application.Repository;
 using CanThoTravel.Application.Repository.PostgreSQL;
-using CanThoTravel.Application.Service.Member;
 using CanThoTravel.Infrastructure.Configuration;
 using CanThoTravel.Infrastructure.Repositories;
 using CanThoTravel.Infrastructure.Repository.Member;
@@ -24,7 +23,6 @@ namespace CanThoTravel.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IMemberRepository, MemberRepository>();
-            builder.Services.AddScoped<IMemberService, MemberService>();
 
             var dbSettings = builder.Configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>();
             if (dbSettings == null)
@@ -60,6 +58,7 @@ namespace CanThoTravel.API
             });
 
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetAllMembersQuery>());
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetByIDMembersQuery>());
 
             var app = builder.Build();
 

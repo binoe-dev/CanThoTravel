@@ -1,4 +1,5 @@
-﻿using CanThoTravel.Application.Service.Member;
+﻿using CanThoTravel.Application.CQRS.Members.Queries;
+using CanThoTravel.Application.DTOs.Member;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,18 +10,37 @@ namespace CanThoTravel.API.Controllers
     public class MemberController : ControllerBase
     {
         private readonly ILogger<MemberController> _logger;
-        private readonly IMemberService _memberService;
+        private readonly IMediator _mediator;
 
-        public MemberController(ILogger<MemberController> logger, IMemberService memberService)
+        public MemberController(ILogger<MemberController> logger, IMediator mediator)
         {
             _logger = logger;
-            _memberService = memberService;
+            _mediator = mediator;                                   
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
-            var result = await _memberService.Get();
+            var result = await _mediator.Send(new GetAllMembersQuery());
+            if (result == null || !result.Any())
+            {
+                return NotFound("No members found.");
+            }
+            return Ok(result);
+        }       
+
+        [HttpPost("GetById")]
+        public async Task<IActionResult> GetById(GetMemberDTO request)
+        {
+            if (string.IsNullOrEmpty(request.Id))
+            {
+                return BadRequest("ID cannot be null or empty.");
+            }
+            var result = await _mediator.Send(new GetByIDMembersQuery(request.Id));
+            if (result == null)
+            {
+                return NotFound($"Member with ID {request.Id} not found.");
+            }
             return Ok(result);
         }
     }

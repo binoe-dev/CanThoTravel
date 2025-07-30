@@ -3,5 +3,5 @@ using MediatR;
 
 namespace CanThoTravel.Application.CQRS.Members.Queries
 {
-    public record GetAllMembersQuery : IRequest<List<MemberResponseDTO>>;
+    public record GetByIDMembersQuery(string Id) : IRequest<MemberResponseDTO?>;
 }

@@ -9,7 +9,8 @@ namespace CanThoTravel.Application.Repository
 {
     public interface IMemberRepository
     {
-        Task<List<MemberEntity>> Get();
         Task<List<MemberEntity>> GetAll();
+        Task<MemberEntity?> GetByIdAsync(string id);
     }
 }
+        
