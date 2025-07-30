@@ -8,7 +8,7 @@ namespace CanThoTravel.Domain.Entities.Member
 {
     public class MemberEntity : BaseEntity
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Address { get; set; }

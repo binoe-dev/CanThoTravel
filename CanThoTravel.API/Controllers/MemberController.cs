@@ -32,9 +32,9 @@ namespace CanThoTravel.API.Controllers
         [HttpPost("GetById")]
         public async Task<IActionResult> GetById(GetMemberDTO request)
         {
-            if (string.IsNullOrEmpty(request.Id))
+            if (request.Id <= 0)
             {
-                return BadRequest("ID cannot be null or empty.");
+                return BadRequest("ID must be a positive integer.");
             }
             var result = await _mediator.Send(new GetByIDMembersQuery(request.Id));
             if (result == null)
