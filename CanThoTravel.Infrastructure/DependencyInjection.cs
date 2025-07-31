@@ -23,9 +23,9 @@ namespace CanThoTravel.Infrastructure
 
             // Register NpgsqlConnection and PostgreTransactionManager
             services.AddScoped(_ => new NpgsqlConnection(dbSettings.PostgreConnectionString));
-            services.AddScoped(_ => new PostgreTransactionManager(_.GetRequiredService<NpgsqlConnection>(), configuration));
+            services.AddScoped<ITransactionManager, PostgreTransactionManager>();
 
-            // Register ITransactionManager
+            // Register Repository
             services.AddScoped<IMemberRepository, MemberRepository>();
 
             return services;

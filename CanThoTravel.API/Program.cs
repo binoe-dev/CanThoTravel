@@ -15,8 +15,8 @@ namespace CanThoTravel.API
             builder.Services.AddSwaggerGen();
 
             // Add services from other layers
-            builder.Services.AddApplicationServices();
             builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddApplicationServices();
 
             var app = builder.Build();
 
