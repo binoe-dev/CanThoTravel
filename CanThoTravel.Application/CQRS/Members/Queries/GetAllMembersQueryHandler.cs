@@ -1,3 +1,4 @@
+using AutoMapper;
 using CanThoTravel.Application.DTOs.Member;
 using CanThoTravel.Application.Repository;
 using CanThoTravel.Domain.Entities.Member;
@@ -11,23 +12,21 @@ namespace CanThoTravel.Application.CQRS.Members.Queries
     public class GetAllMembersQueryHandler : IRequestHandler<GetAllMembersQuery, List<MemberResponseDTO>>
     {
         private readonly IMemberRepository _memberRepository;
+        private readonly IMapper _mapper;
 
-        public GetAllMembersQueryHandler(IMemberRepository memberRepository)
+        public GetAllMembersQueryHandler(IMemberRepository memberRepository, IMapper mapper)
         {
             _memberRepository = memberRepository;
+            _mapper = mapper;
         }
 
         public async Task<List<MemberResponseDTO>> Handle(GetAllMembersQuery request, CancellationToken cancellationToken)
         {
             // Uses the existing repository logic, which currently returns a mock list.
-            var lstEntities = await _memberRepository.GetAll();
+            var lstEntities = await _memberRepository.GetAllAsync();
             if (lstEntities == null || lstEntities.Count == 0) return new List<MemberResponseDTO>();
 
-            return lstEntities.Select(member => new MemberResponseDTO
-            {
-                Id = member.Id,
-                FullName = member.Name,
-            }).ToList();
+            return _mapper.Map<List<MemberResponseDTO>>(lstEntities);
         }
     }
 }

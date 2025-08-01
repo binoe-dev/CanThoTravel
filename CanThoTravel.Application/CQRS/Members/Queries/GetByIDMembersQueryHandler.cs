@@ -1,3 +1,4 @@
+using AutoMapper;
 using CanThoTravel.Application.DTOs.Member;
 using CanThoTravel.Application.Repository;
 using MediatR;
@@ -7,10 +8,12 @@ namespace CanThoTravel.Application.CQRS.Members.Queries
     public class GetByIDMembersQueryHandler : IRequestHandler<GetByIDMembersQuery, MemberResponseDTO?>
     {
         private readonly IMemberRepository _memberRepository;
+        private readonly IMapper _mapper;
 
-        public GetByIDMembersQueryHandler(IMemberRepository memberRepository)
+        public GetByIDMembersQueryHandler(IMemberRepository memberRepository, IMapper mapper)
         {
             _memberRepository = memberRepository;
+            _mapper = mapper;
         }
 
         public async Task<MemberResponseDTO?> Handle(GetByIDMembersQuery request, CancellationToken cancellationToken)
@@ -21,11 +24,7 @@ namespace CanThoTravel.Application.CQRS.Members.Queries
                 return null;
             }
 
-            return new MemberResponseDTO
-            {
-                Id = entity.Id,
-                FullName = entity.Name,
-            };
+            return _mapper.Map<MemberResponseDTO>(entity);
         }
     }
 }

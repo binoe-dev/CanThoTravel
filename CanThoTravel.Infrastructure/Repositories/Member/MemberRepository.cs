@@ -27,7 +27,7 @@ namespace CanThoTravel.Infrastructure.Repository.Member
         {
         }
 
-        public async Task<List<MemberEntity>> GetAll()
+        public async Task<List<MemberEntity>> GetAllAsync()
         {
             return lstMembers;
         }
@@ -39,6 +39,31 @@ namespace CanThoTravel.Infrastructure.Repository.Member
 
             var result = await ExecuteFunctionWithCursorAsync<MemberEntity>("masterdata.get_members_by_id", lstParams);
             return result.FirstOrDefault();
+        }
+
+        public async Task AddAsync(MemberEntity member)
+        {
+            var lstParams = new Dictionary<string, object>
+            {
+                { "p_name", member.Name },
+                { "p_type", member.Type },
+                { "p_address", member.Address }
+            };
+
+            await ExecuteVoidFunctionAsync("masterdata.add_member", lstParams);
+        }
+
+        public async Task UpdateAsync(MemberEntity member)
+        {
+            var lstParams = new Dictionary<string, object>
+            {
+                { "p_id", member.Id },
+                { "p_name", member.Name },
+                { "p_type", member.Type },
+                { "p_address", member.Address }
+            };
+
+            await ExecuteVoidFunctionAsync("masterdata.update_member", lstParams);
         }
     }
 }
