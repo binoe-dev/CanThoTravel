@@ -1,4 +1,5 @@
-﻿using CanThoTravel.Application.CQRS.Members.Queries;
+﻿using CanThoTravel.Application.CQRS.Members.Commands;
+using CanThoTravel.Application.CQRS.Members.Queries;
 using CanThoTravel.Application.DTOs.Member;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,24 @@ namespace CanThoTravel.API.Controllers
                 return NotFound($"Member with ID {request.Id} not found.");
             }
             return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMember([FromBody] AddMemberRequestDTO request)
+        {
+            await _mediator.Send(new AddMemberCommand(request));
+            return Ok("Member added successfully.");
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateMember([FromBody] UpdateMemberRequestDTO request)
+        {
+            if (request.Id <= 0)
+            {
+                return BadRequest("ID must be a positive integer.");
+            }
+            await _mediator.Send(new UpdateMemberCommand(request));
+            return Ok($"Member with ID {request.Id} updated successfully.");
         }
     }
 }
