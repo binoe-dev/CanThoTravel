@@ -54,7 +54,8 @@ namespace CanThoTravel.Infrastructure.Abstracts
                 cmd.Transaction = tx;
                 if (commandTimeout.HasValue) cmd.CommandTimeout = commandTimeout.Value;
 
-                return await cmd.ExecuteNonQueryAsync();
+                var result = await cmd.ExecuteScalarAsync();
+                return Convert.ToInt32(result);
             });
         }
 

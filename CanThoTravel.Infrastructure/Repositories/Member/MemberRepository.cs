@@ -41,7 +41,7 @@ namespace CanThoTravel.Infrastructure.Repository.Member
             return result.FirstOrDefault();
         }
 
-        public async Task AddAsync(MemberEntity member)
+        public async Task<int> AddAsync(MemberEntity member)
         {
             var lstParams = new Dictionary<string, object>
             {
@@ -50,7 +50,7 @@ namespace CanThoTravel.Infrastructure.Repository.Member
                 { "p_address", member.Address }
             };
 
-            await ExecuteVoidFunctionAsync("masterdata.add_member", lstParams);
+            return await ExecuteNonQueryFunctionAsync("masterdata.add_member", lstParams);
         }
 
         public async Task UpdateAsync(MemberEntity member)

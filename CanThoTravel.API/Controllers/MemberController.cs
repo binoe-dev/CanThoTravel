@@ -48,8 +48,13 @@ namespace CanThoTravel.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMember([FromBody] AddMemberRequestDTO request)
         {
-            await _mediator.Send(new AddMemberCommand(request));
-            return Ok("Member added successfully.");
+            var id = await _mediator.Send(new AddMemberCommand(request));
+            if (id <= 0)
+            {
+                return BadRequest("Failed to add member.");
+            }
+
+            return Ok($"Member {id} added successfully.");
         }
 
         [HttpPut]

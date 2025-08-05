@@ -11,7 +11,7 @@ namespace CanThoTravel.Application.Repository
     {
         Task<List<MemberEntity>> GetAllAsync();
         Task<MemberEntity?> GetByIdAsync(int id);
-        Task AddAsync(MemberEntity member);
+        Task<int> AddAsync(MemberEntity member);
         Task UpdateAsync(MemberEntity member);
     }
 }
