@@ -1,6 +1,5 @@
-using System.Reflection;
-using CanThoTravel.Application.CQRS.Members.Queries;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace CanThoTravel.Application
 {
@@ -8,10 +7,12 @@ namespace CanThoTravel.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            // Register MediatR and AutoMapper for the application layer
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            // Configure AutoMapper
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            
+
+            // Configure MediatR
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
             return services;
         }
     }
