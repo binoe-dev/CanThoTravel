@@ -1,3 +1,4 @@
+using CanThoTravel.Application.IRepositories.Authentication;
 using CanThoTravel.Application.Repository;
 using CanThoTravel.Application.Repository.PostgreSQL;
 using CanThoTravel.Infrastructure.Configuration;
@@ -27,6 +28,7 @@ namespace CanThoTravel.Infrastructure
 
             // Register Repository
             services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<IAuthService, AuthService>();
 
             return services;
         }

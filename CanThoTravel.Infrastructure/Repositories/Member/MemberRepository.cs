@@ -41,11 +41,22 @@ namespace CanThoTravel.Infrastructure.Repository.Member
             return result.FirstOrDefault();
         }
 
+        public async Task<MemberEntity?> GetByEmailAsync(string email)
+        {
+            var lstParams = new Dictionary<string, object>
+            {
+                { "p_email", email }
+            };
+            var result = await ExecuteFunctionWithCursorAsync<MemberEntity>("masterdata.get_members_by_email", lstParams);
+            return result.FirstOrDefault();
+        }
         public async Task<int> AddAsync(MemberEntity member)
         {
             var lstParams = new Dictionary<string, object>
             {
                 { "p_name", member.Name },
+                { "p_email", member.Email },
+                { "p_password_hash", member.PasswordHash },
                 { "p_type", member.Type },
                 { "p_address", member.Address }
             };
