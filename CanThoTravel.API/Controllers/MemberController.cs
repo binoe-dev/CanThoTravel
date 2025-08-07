@@ -2,10 +2,12 @@
 using CanThoTravel.Application.CQRS.Members.Queries;
 using CanThoTravel.Application.DTOs.Member;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CanThoTravel.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class MemberController : ControllerBase
