@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CanThoTravel.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class MemberController : ControllerBase

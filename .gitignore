@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Secret key
+appsettings.Development.json
