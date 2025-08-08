@@ -4,7 +4,7 @@ namespace CanThoTravel.Application.IRepositories.Authentication
 {
     public interface IAuthService
     {
-        string GenerateJwtToken(MemberEntity member);
+        string GenerateJwtToken(MemberEntity member, string? type = null);
         string HashPassword(string password);
         bool VerifyPassword(string password, string passwordHash);
     }

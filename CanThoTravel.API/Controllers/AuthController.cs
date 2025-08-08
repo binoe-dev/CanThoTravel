@@ -3,6 +3,7 @@ using CanThoTravel.Application.CQRS.Members.Queries;
 using CanThoTravel.Application.DTOs.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using CanThoTravel.Application.CQRS.Authentication.Queries;
 
 namespace CanThoTravel.API.Controllers
 {
@@ -17,32 +18,15 @@ namespace CanThoTravel.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequestDTO request)
+        [HttpPost("generate-token")]
+        public async Task<IActionResult> GenerateToken([FromBody] GenerateTokenRequestDTO request)
         {
-            try
+            var token = await _mediator.Send(new GenerateTokenQuery(request));
+            if (token == null)
             {
-                var result = await _mediator.Send(new RegisterMemberCommand(request));
-                return Ok(result);
+                return NotFound("Member not found.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDTO request)
-        {
-            try
-            {
-                var result = await _mediator.Send(new LoginQuery(request));
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(new { Token = token });
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CanThoTravel.Application.CQRS.Members.Commands;
 using CanThoTravel.Application.CQRS.Members.Queries;
+using CanThoTravel.Application.DTOs.Authentication;
 using CanThoTravel.Application.DTOs.Member;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CanThoTravel.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class MemberController : ControllerBase
@@ -32,7 +33,7 @@ namespace CanThoTravel.API.Controllers
             return Ok(result);
         }       
 
-        [HttpPost("GetById")]
+        [HttpPost("getbyid")]
         public async Task<IActionResult> GetById(GetMemberDTO request)
         {
             if (request.Id <= 0)
@@ -68,6 +69,35 @@ namespace CanThoTravel.API.Controllers
             }
             await _mediator.Send(new UpdateMemberCommand(request));
             return Ok($"Member with ID {request.Id} updated successfully.");
+        }
+
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDTO request)
+        {
+            try
+            {
+                var result = await _mediator.Send(new RegisterMemberCommand(request));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO request)
+        {
+            try
+            {
+                var result = await _mediator.Send(new LoginQuery(request));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
