@@ -14,22 +14,15 @@ namespace CanThoTravel.Infrastructure.Repository.Member
 {
     public class MemberRepository : PostgresFunctionBase<MemberEntity>, IMemberRepository
     {
-        public static List<MemberEntity> lstMembers = new List<MemberEntity>()
-        {
-            new MemberEntity { Id = 1, Name = "John Doe", Type = "Regular", Address = "123 Main St" },
-            new MemberEntity { Id = 2, Address = "456 Elm St", Name = "Jane Smith", Type = "Premium" },
-            new MemberEntity { Id = 3, Address = "789 Oak St", Name = "Alice Johnson", Type = "Regular" },
-            new MemberEntity { Id = 4, Address = "321 Pine St", Name = "Bob Brown", Type = "Premium" },
-            new MemberEntity { Id = 5, Address = "654 Maple St", Name = "Charlie White", Type = "Regular" }
-        };
-
         public MemberRepository(NpgsqlConnection npgsqlConnection, ITransactionManager transactionManager) : base(npgsqlConnection, transactionManager)
         {
         }
 
         public async Task<List<MemberEntity>> GetAllAsync()
         {
-            return lstMembers;
+            var lstParams = new Dictionary<string, object>();
+            var result = await ExecuteFunctionWithCursorAsync<MemberEntity>("masterdata.get_all_members", lstParams);
+            return result.ToList();
         }
 
         public async Task<MemberEntity?> GetByIdAsync(int id)
@@ -50,6 +43,7 @@ namespace CanThoTravel.Infrastructure.Repository.Member
             var result = await ExecuteFunctionWithCursorAsync<MemberEntity>("masterdata.get_members_by_email", lstParams);
             return result.FirstOrDefault();
         }
+
         public async Task<int> AddAsync(MemberEntity member)
         {
             var lstParams = new Dictionary<string, object>
