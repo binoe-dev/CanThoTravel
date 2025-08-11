@@ -2,6 +2,7 @@
 using CanThoTravel.Application.CQRS.Members.Queries;
 using CanThoTravel.Application.DTOs.Authentication;
 using CanThoTravel.Application.DTOs.Member;
+using CanThoTravel.Application.Security;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,19 @@ namespace CanThoTravel.API.Controllers
         [HttpPost("getbyid")]
         public async Task<IActionResult> GetById(GetMemberDTO request)
         {
+            var userContext = HttpContext.Items["UserContext"] as UserContext;
+
+            if (userContext != null)
+            {
+                // You can now access user properties like:
+                // userContext.Id
+                // userContext.Name
+                // userContext.Email
+                // userContext.Type
+
+                _logger.LogInformation("User {UserId} ({UserType}) is requesting data for member {MemberId}", userContext.Id, userContext.Type, request.Id);
+            }
+
             if (request.Id <= 0)
             {
                 return BadRequest("ID must be a positive integer.");

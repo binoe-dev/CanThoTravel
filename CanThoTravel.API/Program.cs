@@ -1,3 +1,4 @@
+using CanThoTravel.API.Middleware;
 using CanThoTravel.Application;
 using CanThoTravel.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -81,7 +82,7 @@ namespace CanThoTravel.API
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseMiddleware<UserContextMiddleware>();
             app.MapControllers();
 
             app.Run();
