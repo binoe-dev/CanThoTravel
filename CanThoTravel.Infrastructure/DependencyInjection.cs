@@ -28,7 +28,8 @@ namespace CanThoTravel.Infrastructure
 
             // Register Repository
             services.AddScoped<IMemberRepository, MemberRepository>();
-            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ITokenGenerator, AuthManager>();
+            services.AddScoped<IPasswordHasher, AuthManager>();
 
             return services;
         }

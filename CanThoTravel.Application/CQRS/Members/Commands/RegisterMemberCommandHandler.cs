@@ -11,13 +11,15 @@ namespace CanThoTravel.Application.CQRS.Members.Commands
     public class RegisterMemberCommandHandler : IRequestHandler<RegisterMemberCommand, AuthResponseDTO>
     {
         private readonly IMemberRepository _memberRepository;
-        private readonly IAuthService _authService;
+        private readonly ITokenGenerator _tokenGenerator;
+        private readonly IPasswordHasher _passwordHasher;
         private readonly IMapper _mapper;
 
-        public RegisterMemberCommandHandler(IMemberRepository memberRepository, IAuthService authService, IMapper mapper)
+        public RegisterMemberCommandHandler(IMemberRepository memberRepository, ITokenGenerator tokenGenerator, IPasswordHasher passwordHasher, IMapper mapper)
         {
             _memberRepository = memberRepository;
-            _authService = authService;
+            _tokenGenerator = tokenGenerator;
+            _passwordHasher = passwordHasher;
             _mapper = mapper;
         }
 
@@ -34,7 +36,7 @@ namespace CanThoTravel.Application.CQRS.Members.Commands
                 Name = request.Dto.Name,
                 Email = request.Dto.Email,
                 Address = request.Dto.Address,
-                PasswordHash = _authService.HashPassword(request.Dto.Password),
+                PasswordHash = _passwordHasher.HashPassword(request.Dto.Password),
                 Type = "Regular" // Default type
             };
 
@@ -45,7 +47,7 @@ namespace CanThoTravel.Application.CQRS.Members.Commands
             }
             memberEntity.Id = newMemberId;
 
-            var token = _authService.GenerateJwtToken(memberEntity);
+            var token = _tokenGenerator.GenerateJwtToken(memberEntity);
             var userDto = _mapper.Map<MemberResponseDTO>(memberEntity);
 
             return new AuthResponseDTO { Token = token, User = userDto };

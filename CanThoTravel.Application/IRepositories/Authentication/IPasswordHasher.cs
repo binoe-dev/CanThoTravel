@@ -1,10 +1,7 @@
-using CanThoTravel.Domain.Entities.Member;
-
 namespace CanThoTravel.Application.IRepositories.Authentication
 {
-    public interface IAuthService
+    public interface IPasswordHasher
     {
-        string GenerateJwtToken(MemberEntity member, string? type = null);
         string HashPassword(string password);
         bool VerifyPassword(string password, string passwordHash);
     }

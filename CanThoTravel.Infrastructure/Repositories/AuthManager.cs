@@ -10,11 +10,11 @@ using System.Text;
 
 namespace CanThoTravel.Infrastructure.Repositories
 {
-    public class AuthService : IAuthService
+    public class AuthManager : IPasswordHasher, ITokenGenerator
     {
         private readonly IConfiguration _configuration;
 
-        public AuthService(IConfiguration configuration)
+        public AuthManager(IConfiguration configuration)
         {
             _configuration = configuration;
         }

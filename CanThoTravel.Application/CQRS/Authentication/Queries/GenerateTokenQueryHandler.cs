@@ -7,12 +7,12 @@ namespace CanThoTravel.Application.CQRS.Authentication.Queries
     public class GenerateTokenQueryHandler : IRequestHandler<GenerateTokenQuery, string?>
     {
         private readonly IMemberRepository _memberRepository;
-        private readonly IAuthService _authService;
+        private readonly ITokenGenerator _tokenGenerator;
 
-        public GenerateTokenQueryHandler(IMemberRepository memberRepository, IAuthService authService)
+        public GenerateTokenQueryHandler(IMemberRepository memberRepository, ITokenGenerator tokenGenerator)
         {
             _memberRepository = memberRepository;
-            _authService = authService;
+            _tokenGenerator = tokenGenerator;
         }
 
         public async Task<string?> Handle(GenerateTokenQuery request, CancellationToken cancellationToken)
@@ -24,7 +24,7 @@ namespace CanThoTravel.Application.CQRS.Authentication.Queries
             }
 
             // The Type from the request is added as a claim in the token
-            var token = _authService.GenerateJwtToken(member, request.Dto.Type);
+            var token = _tokenGenerator.GenerateJwtToken(member, request.Dto.Type);
             return token;
         }
     }
