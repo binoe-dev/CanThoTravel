@@ -4,11 +4,13 @@ using CanThoTravel.Application.DTOs.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using CanThoTravel.Application.CQRS.Authentication.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CanThoTravel.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
