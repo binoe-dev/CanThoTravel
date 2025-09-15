@@ -1,6 +1,6 @@
 
 using CanThoTravel.Application.IRepositories.Food;
-using CanThoTravel.Application.Repository.PostgreSQL;
+using CanThoTravel.Application.IRepositories.PostgreSQL;
 using CanThoTravel.Domain.Entities.Food;
 using CanThoTravel.Infrastructure.Abstracts;
 using Npgsql;

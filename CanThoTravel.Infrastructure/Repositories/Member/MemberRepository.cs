@@ -1,10 +1,10 @@
-﻿using CanThoTravel.Application.Repository;
-using CanThoTravel.Application.Repository.PostgreSQL;
+﻿using CanThoTravel.Application.IRepositories.Member;
+using CanThoTravel.Application.IRepositories.PostgreSQL;
 using CanThoTravel.Domain.Entities.Member;
 using CanThoTravel.Infrastructure.Abstracts;
 using Npgsql;
 
-namespace CanThoTravel.Infrastructure.Repository.Member
+namespace CanThoTravel.Infrastructure.Repositories.Member
 {
     public class MemberRepository : PostgresFunctionBase<MemberEntity>, IMemberRepository
     {

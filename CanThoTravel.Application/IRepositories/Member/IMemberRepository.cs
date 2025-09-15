@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CanThoTravel.Domain.Entities.Member;
+﻿using CanThoTravel.Domain.Entities.Member;
 
-namespace CanThoTravel.Application.Repository
+namespace CanThoTravel.Application.IRepositories.Member
 {
     public interface IMemberRepository
     {

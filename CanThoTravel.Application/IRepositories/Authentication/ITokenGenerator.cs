@@ -1,4 +1,3 @@
-// filepath: d:\Code\Dotnet\CanThoTravel\CanThoTravel.Application\IRepositories\Authentication\ITokenGenerator.cs
 using CanThoTravel.Domain.Entities.Member;
 
 namespace CanThoTravel.Application.IRepositories.Authentication

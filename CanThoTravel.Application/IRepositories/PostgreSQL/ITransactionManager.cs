@@ -1,11 +1,6 @@
 ﻿using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CanThoTravel.Application.Repository.PostgreSQL
+namespace CanThoTravel.Application.IRepositories.PostgreSQL
 {
     public interface ITransactionManager
     {

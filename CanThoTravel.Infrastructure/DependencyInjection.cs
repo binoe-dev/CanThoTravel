@@ -1,11 +1,11 @@
 using CanThoTravel.Application.IRepositories.Authentication;
 using CanThoTravel.Application.IRepositories.Food;
-using CanThoTravel.Application.Repository;
-using CanThoTravel.Application.Repository.PostgreSQL;
+using CanThoTravel.Application.IRepositories.Member;
+using CanThoTravel.Application.IRepositories.PostgreSQL;
 using CanThoTravel.Infrastructure.Configuration;
 using CanThoTravel.Infrastructure.Repositories;
 using CanThoTravel.Infrastructure.Repositories.Food;
-using CanThoTravel.Infrastructure.Repository.Member;
+using CanThoTravel.Infrastructure.Repositories.Member;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
