@@ -1,8 +1,10 @@
 using CanThoTravel.Application.IRepositories.Authentication;
+using CanThoTravel.Application.IRepositories.Food;
 using CanThoTravel.Application.Repository;
 using CanThoTravel.Application.Repository.PostgreSQL;
 using CanThoTravel.Infrastructure.Configuration;
 using CanThoTravel.Infrastructure.Repositories;
+using CanThoTravel.Infrastructure.Repositories.Food;
 using CanThoTravel.Infrastructure.Repository.Member;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,7 @@ namespace CanThoTravel.Infrastructure
 
             // Register Repository
             services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<IFoodRepository, FoodRepository>();
             services.AddScoped<ITokenGenerator, AuthManager>();
             services.AddScoped<IPasswordHasher, AuthManager>();
 

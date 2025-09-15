@@ -2,13 +2,7 @@
 using CanThoTravel.Application.Repository.PostgreSQL;
 using CanThoTravel.Domain.Entities.Member;
 using CanThoTravel.Infrastructure.Abstracts;
-using Microsoft.Extensions.Logging;
 using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CanThoTravel.Infrastructure.Repository.Member
 {
@@ -69,6 +63,15 @@ namespace CanThoTravel.Infrastructure.Repository.Member
             };
 
             await ExecuteVoidFunctionAsync("masterdata.update_member", lstParams);
+        }
+        public async Task DeleteAsync(int id)
+        {
+            var lstParams = new Dictionary<string, object>
+            {
+                { "p_id", id }
+            };
+
+            await ExecuteVoidFunctionAsync("masterdata.delete_member", lstParams);
         }
     }
 }

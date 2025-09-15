@@ -14,5 +14,6 @@ namespace CanThoTravel.Application.Repository
         Task<MemberEntity?> GetByEmailAsync(string email);
         Task<int> AddAsync(MemberEntity member);
         Task UpdateAsync(MemberEntity member);
+        Task DeleteAsync(int id);
     }
 }
