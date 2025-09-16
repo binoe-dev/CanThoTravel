@@ -19,6 +19,8 @@ namespace CanThoTravel.Infrastructure.Repositories.Food
             {
                 { "p_name", food.Name },
                 { "p_description", food.Description },
+                { "p_price", food.Price },
+                { "p_address", food.Address },
                 { "p_image_url", food.ImageUrl }
             };
             return ExecuteNonQueryFunctionAsync("masterdata.add_food", parameters);
@@ -48,6 +50,8 @@ namespace CanThoTravel.Infrastructure.Repositories.Food
                 { "p_id", food.Id },
                 { "p_name", food.Name },
                 { "p_description", food.Description },
+                { "p_price", food.Price },
+                { "p_address", food.Address },
                 { "p_image_url", food.ImageUrl }
             };
             return ExecuteNonQueryFunctionAsync("masterdata.update_food", parameters);

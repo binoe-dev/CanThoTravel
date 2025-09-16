@@ -2,7 +2,7 @@ using AutoMapper;
 using CanThoTravel.Application.DTOs.Authentication;
 using CanThoTravel.Application.DTOs.Member;
 using CanThoTravel.Application.IRepositories.Authentication;
-using CanThoTravel.Application.Repository;
+using CanThoTravel.Application.IRepositories.Member;
 using CanThoTravel.Domain.Entities.Member;
 using MediatR;
 

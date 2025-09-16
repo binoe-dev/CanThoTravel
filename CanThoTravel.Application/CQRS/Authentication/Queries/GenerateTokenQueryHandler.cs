@@ -1,5 +1,5 @@
 using CanThoTravel.Application.IRepositories.Authentication;
-using CanThoTravel.Application.Repository;
+using CanThoTravel.Application.IRepositories.Member;
 using MediatR;
 
 namespace CanThoTravel.Application.CQRS.Authentication.Queries

@@ -1,5 +1,5 @@
 using AutoMapper;
-using CanThoTravel.Application.Repository;
+using CanThoTravel.Application.IRepositories.Member;
 using CanThoTravel.Domain.Entities.Member;
 using MediatR;
 using System.Threading;

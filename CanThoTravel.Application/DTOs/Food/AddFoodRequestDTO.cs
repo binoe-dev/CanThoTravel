@@ -1,8 +1,8 @@
-namespace CanThoTravel.Domain.Entities.Food
+
+namespace CanThoTravel.Application.DTOs.Food
 {
-    public class FoodEntity : BaseEntity
+    public class AddFoodRequestDTO
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }

@@ -1,6 +1,6 @@
 using AutoMapper;
 using CanThoTravel.Application.DTOs.Member;
-using CanThoTravel.Application.Repository;
+using CanThoTravel.Application.IRepositories.Member;
 using MediatR;
 
 namespace CanThoTravel.Application.CQRS.Members.Queries

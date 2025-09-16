@@ -1,7 +1,6 @@
 using AutoMapper;
 using CanThoTravel.Application.DTOs.Member;
-using CanThoTravel.Application.Repository;
-using CanThoTravel.Domain.Entities.Member;
+using CanThoTravel.Application.IRepositories.Member;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
