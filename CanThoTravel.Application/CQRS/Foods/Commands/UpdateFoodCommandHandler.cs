@@ -1,12 +1,10 @@
+using AutoMapper;
+using CanThoTravel.Application.IRepositories.Food;
+using CanThoTravel.Domain.Entities.Food;
+using MediatR;
+
 namespace CanThoTravel.Application.CQRS.Foods.Commands
 {
-    using AutoMapper;
-    using CanThoTravel.Application.IRepositories.Food;
-    using CanThoTravel.Domain.Entities.Food;
-    using MediatR;
-    using System.Threading;
-    using System.Threading.Tasks;
-
     public class UpdateFoodCommandHandler : IRequestHandler<UpdateFoodCommand, bool>
     {
         private readonly IFoodRepository _foodRepository;

@@ -85,6 +85,20 @@ namespace CanThoTravel.API.Controllers
             return Ok($"Member with ID {request.Id} updated successfully.");
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteMember([FromBody] DeleteMemberRequestDTO request)
+        {
+            if (request.Id <= 0)
+            {
+                return BadRequest("ID must be a positive integer.");
+            }
+            var result = await _mediator.Send(new DeleteMemberCommand(request.Id));
+            if (!result)
+            {
+                return NotFound($"Member with ID {request.Id} not found.");
+            }
+            return Ok($"Member with ID {request.Id} deleted successfully.");
+        }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDTO request)
