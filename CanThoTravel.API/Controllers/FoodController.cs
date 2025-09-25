@@ -51,7 +51,7 @@ namespace CanThoTravel.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
+        public async Task<IActionResult> GetByIdAsync([FromBody] int id)
         {
             var food = await _mediator.Send(new GetByIDFoodQuery(id));
             if (food == null)
