@@ -1,0 +1,73 @@
+name: Build and Deploy Service
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  AZURE_WEBAPP_NAME: 'cantho-travel'
+  AZURE_WEBAPP_PACKAGE_PATH: "./CanThoTravel/publish"
+  SOLUTION_PATH: 'CanThoTravel.sln'
+  BUILD_CONFIGURATION: 'Release'
+  API_PROJECT_PATH: 'CanThoTravel'
+  PUBLISH_DIR: './publish'
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SOLUTION_PATH }}
+
+      - name: Build the project
+        run: dotnet build ${{ env.SOLUTION_PATH }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
+
+      - name: Run tests
+        run: dotnet test ${{ env.SOLUTION_PATH }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-build --verbosity normal
+
+      - name: Publish the project
+        run: dotnet publish ${{ env.API_PROJECT_PATH }} --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.PUBLISH_DIR }} --no-build
+
+      - name: Archive the published output
+        run: zip -r publish.zip ${{ env.PUBLISH_DIR }}
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: WebApp
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+  deploy:
+    name: Deploy to Azure Web App
+    runs-on: ubuntu-latest
+    needs: [build-and-test]
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: WebApp
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
